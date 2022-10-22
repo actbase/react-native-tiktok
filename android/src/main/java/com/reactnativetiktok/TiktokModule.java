@@ -24,6 +24,7 @@ import com.facebook.react.module.annotations.ReactModule;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @ReactModule(name = TiktokModule.NAME)
 public class TiktokModule extends ReactContextBaseJavaModule {
@@ -72,10 +73,10 @@ public class TiktokModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void auth(Callback callBack) {
+    public void auth(ArrayList<String> scopes, Callback callBack) {
       TiktokOpenApi tiktokOpenApi = TikTokOpenApiFactory.create(getReactApplicationContext());
       Authorization.Request request = new Authorization.Request();
-      request.scope = "user.info.basic,video.list";
+      request.scope = String.join(',', scopes);
       request.callerLocalEntry = "com.reactnativetiktok.TikTokEntryActivity";
       tiktokOpenApi.authorize(request);
     }
