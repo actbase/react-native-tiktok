@@ -4,10 +4,9 @@ import Photos
 
 @objc(Tiktok)
 class Tiktok: UIViewController {
-    
+
   @objc
-  func auth(_ callback: @escaping RCTResponseSenderBlock) {
-    let scopes = ["user.info.basic,video.list"] // list your scopes
+  func auth(_ scopes: [String], callback: @escaping RCTResponseSenderBlock) {
     let scopesSet = NSOrderedSet(array:scopes)
     let request = TikTokOpenSDKAuthRequest()
     request.permissions = scopesSet
